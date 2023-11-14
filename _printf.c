@@ -10,6 +10,7 @@ int _printf(const char *format, ...)
 {
     va_list args;
     int printed = 0;
+    int i;
 
     va_start(args, format);
 
@@ -50,7 +51,7 @@ int _printf(const char *format, ...)
                     int num = va_arg(args, int);
                     char buffer[12];
                     int len = snprintf(buffer, sizeof(buffer), "%d", num);
-                    for (int i = 0; i < len; i++) {
+                    for (i = 0; i < len; i++) {
                         _putchar(buffer[i]);
                         printed++;
                     }
