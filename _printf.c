@@ -1,4 +1,4 @@
-#include "main.h"
+#include "main.h" 
 
 /**
  * _printf - Custom printf function
@@ -9,7 +9,7 @@
 int _printf(const char *format, ...)
 {
     va_list args;
-    int count = 0;
+    int printed = 0;
 
     va_start(args, format);
 
@@ -24,7 +24,7 @@ int _printf(const char *format, ...)
                 {
                     int c = va_arg(args, int);
                     _putchar(c);
-                    count++;
+                    printed++;
                     break;
                 }
                 case 's':
@@ -34,14 +34,26 @@ int _printf(const char *format, ...)
                     {
                         _putchar(*s);
                         s++;
-                        count++;
+                        printed++;
                     }
                     break;
                 }
                 case '%':
                 {
                     _putchar('%');
-                    count++;
+                    printed++;
+                    break;
+                }
+                case 'd':
+                case 'i':
+                {
+                    int num = va_arg(args, int);
+                    char buffer[12];
+                    int len = snprintf(buffer, sizeof(buffer), "%d", num);
+                    for (int i = 0; i < len; i++) {
+                        _putchar(buffer[i]);
+                        printed++;
+                    }
                     break;
                 }
                 default:
@@ -51,13 +63,13 @@ int _printf(const char *format, ...)
         else
         {
             _putchar(*format);
-            count++;
+            printed++;
         }
 
         format++;
     }
 
     va_end(args);
-    return count;
+    return printed;
 }
 
