@@ -31,6 +31,8 @@ int _printf(const char *format, ...)
                 case 's':
                 {
                     char *s = va_arg(args, char *);
+                    if (s == NULL)
+	                      s = "";
                     while (*s != '\0')
                     {
                         _putchar(*s);
@@ -49,7 +51,7 @@ int _printf(const char *format, ...)
                 case 'i':
                 {
                     int num = va_arg(args, int);
-                    char buffer[12];
+                    char buffer[BUFFER_SIZE];
                     int len = snprintf(buffer, sizeof(buffer), "%d", num);
                     for (i = 0; i < len; i++) {
                         _putchar(buffer[i]);
