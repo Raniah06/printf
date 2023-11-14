@@ -51,7 +51,7 @@ int _printf(const char *format, ...)
                 case 'i':
                 {
                     int num = va_arg(args, int);
-                    char buffer[BUFFER_SIZE];
+                    char buffer[1024];
                     int len = snprintf(buffer, sizeof(buffer), "%d", num);
                     for (i = 0; i < len; i++) {
                         _putchar(buffer[i]);
